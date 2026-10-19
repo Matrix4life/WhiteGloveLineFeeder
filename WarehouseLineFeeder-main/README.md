@@ -1,20 +1,20 @@
 # White Glove System
 
-A rebranded copy of the supplied warehouse application. Includes requests, picking, delivery tracking, chat, assignments, dashboards and 5S tools.
+White Glove branding for the existing warehouse application.
 
-## Start
-Serve this folder using a static web server, or deploy it to static hosting. For a local preview, run `python3 -m http.server 8000` from this folder, then open http://localhost:8000. Internet access is needed for the existing React, Babel and Supabase libraries.
+## Shared database
+At the owner's request, this version connects to the same Supabase project and tables as the original application. Both apps share users, requests, chat, assignments, settings and history. Changes or deletions in either app affect that shared database. Existing room names are retained to match shared records.
 
-Enter your name on first launch to create the local administrator, then add team members in Admin Panel.
+The connection uses the original public URL and anon key in CONFIG in index.html. No secret or service-role key is embedded. Database permissions and name-only sign-in are inherited; this update does not add secure authentication or audit database access policies.
 
-## Current operating mode
-This copy starts in local browser storage mode with its own storage keys. Data is limited to that browser; it is not shared across devices. The original database address, API key, push key and notification app ID have been removed. No live database was changed.
+Browser-only data from the earlier local version is not migrated automatically.
 
-To enable shared operation, provision a separate database, supply its URL and public key in CONFIG in index.html, and enable ENABLE_SUPABASE. This archive does not include a complete database migration. Review and implement authentication and database access policies before production use: the inherited name-only sign-in is not secure authentication.
+## Deployment
+The repository-root vercel.json publishes WarehouseLineFeeder-main as a static site. The app-folder configuration also supports selecting that folder as Vercel's Root Directory. No build command is needed.
 
-Remote push is disabled pending configuration of a new provider and keys. The optional index.ts push function is retained as source and is not deployed. A new notification integration needs initialization code as well as credentials.
+For local preview, serve the app folder with a static web server. Internet access is required for the database and existing external libraries.
 
-## Branding and defaults
-Replaced the embedded company logo with a White Glove wordmark, replaced all install icons with WG monograms, and updated the page title, app manifest, service worker cache and header branding. Facility room names now default to Line 1, Line 2, Line 3 and Packing; housekeeping areas have generic names. Adjust room lists and warehouse mappings for your operation before rollout.
+## Branding and notifications
+The old company logo and install icons have been replaced with White Glove branding. Original notification provider credentials remain removed; remote push is not configured. Database live updates are separate from remote push.
 
-Warehouse workflows are inherited from the supplied project. This is a branding and isolation update, not a production security audit or a newly implemented premium-delivery workflow.
+The optional index.ts push function is retained as source and is not deployed by this static setup.
