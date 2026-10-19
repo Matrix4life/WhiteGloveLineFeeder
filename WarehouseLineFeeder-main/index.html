@@ -254,9 +254,9 @@
       poor:      { min: 0,  color: '#ff4444', label: 'Needs Improvement' }
     };
     const CONFIG = {
-      ENABLE_SUPABASE: false, // <- set true for real multi-user across devices
-      SUPABASE_URL: "",
-      SUPABASE_ANON_KEY: "",
+      ENABLE_SUPABASE: true, // <- set true for real multi-user across devices
+      SUPABASE_URL: "https://smmbxhkcslcarmlxwzji.supabase.co",
+      SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtbWJ4aGtjc2xjYXJtbHh3emppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzNTc0MTUsImV4cCI6MjA4OTkzMzQxNX0.aN9FGQWuwsDk8LwLWpcLCgkDVnhf4HEyj3LRYZ6q1Es",
       STORAGE_KEY: "white-glove-requests-v1",
       CHAT_KEY: "white-glove-chat-v1",
       REFRESH_MS: 60000, // polling fallback; realtime will override
@@ -267,14 +267,14 @@
       PICK_SLA_WARN: 3,    // ⚡ Warehouse pick time green threshold (mins)
       PICK_SLA_BAD: 7,     // ⚡ Warehouse pick time yellow threshold
       PICK_SLA_CRIT: 12,   // ⚡ Warehouse pick time red threshold
-      ROOMS: ["Line 1", "Line 2", "Line 3", "Packing", "Boxes", "Film/Labels", "Other", "******", "Loading", "Putaway", "Receiving" ],
-      FILM_LABELS_DESTINATIONS: ["Line 1", "Line 2", "Line 3"], // sub-rooms shown when Film/Labels selected
+      ROOMS: ["Bistro", "Salad", "Apple", "MasterPack", "Boxes", "Film/Labels", "Other", "******", "Loading", "Putaway", "Receiving" ],
+      FILM_LABELS_DESTINATIONS: ["Bistro", "Salad", "Apple"], // sub-rooms shown when Film/Labels selected
       WAREHOUSE_ONLY_ROOMS: ["Other", "Loading", "******", "Putaway", "Receiving"],
       ROOM_COLORS: {
-  "Line 1": "#38bdf8",         // Blue
-  "Line 2": "#00ff88",          // Green
-  "Line 3": "#ff4444",          // Red
-  "Packing": "#a78bfa",     // Purple
+  "Bistro": "#38bdf8",         // Blue
+  "Salad": "#00ff88",          // Green
+  "Apple": "#ff4444",          // Red
+  "MasterPack": "#a78bfa",     // Purple
   "Boxes": "#ff9f43",          // Orange
   "Film/Labels": "#fbbf24",    // Yellow
   "Other": "#8b9dc3",          // Gray
@@ -291,7 +291,7 @@
         { id: "zone5", name: "Zone 5", desc: "Maintenance Dock" },
         { id: "zone6", name: "Zone 6", desc: "Pack-Out Area" },
         { id: "zone7", name: "Zone 7", desc: "Dock Area" },
-        { id: "zone8", name: "Zone 8", desc: "Line 1" },
+        { id: "zone8", name: "Zone 8", desc: "Bistro" },
         { id: "zone9", name: "Zone 9", desc: "Film/Labels" },
         { id: "office", name: "Office", desc: "Office" }
       ],
@@ -1887,12 +1887,12 @@ const [assignFiveSZone, setAssignFiveSZone] = useState("");
       // ── FIFO OOR Analyzer ──
       const DELIVERY_LOCATIONS = new Set(['PREPWIP', 'PRECLAM', 'PREBISTRO', 'PREAPPLE', 'PREPACK', 'MASTERPKS']);
       const LOCATION_MAPPING = {
-        'PREPWIP': 'Line 1',
-        'PRECLAM': 'Line 2',
-        'PREBISTRO': 'Line 1',
-        'PREAPPLE': 'Line 3',
-        'PREPACK': 'Packings',
-        'MASTERPKS': 'Packings'
+        'PREPWIP': 'Bistro',
+        'PRECLAM': 'Salad',
+        'PREBISTRO': 'Bistro',
+        'PREAPPLE': 'Apple',
+        'PREPACK': 'MasterPacks',
+        'MASTERPKS': 'MasterPacks'
       };
 
       const analyzeFIFOOOR = async (csvFile) => {
@@ -2572,7 +2572,7 @@ const removeFiveSFindingPhoto = (index) => {
               "3. Tap \"Add\"\n" +
               "4. Open the app from your Home Screen\n" +
               "5. Then enable notifications again\n\n" +
-              "This is an Line 3 requirement for all web apps."
+              "This is an Apple requirement for all web apps."
             );
             return;
           }
@@ -6361,12 +6361,12 @@ ${sortedCompleted.map(r => {
                       <select value={oorLocationFilter} onChange={(e) => setOorLocationFilter(e.target.value)}
                         style={{ padding:'0.5rem', background:'#1e293b', border:'1px solid #334155', borderRadius:'8px', color:'#e2e8f0', fontSize:'0.8rem', cursor:'pointer' }}>
                         <option value="all">All Rooms</option>
-                        <option value="PRECLAM">PRECLAM (Line 2)</option>
-                        <option value="PREBISTRO">PREBISTRO (Line 1)</option>
-                        <option value="PREPWIP">PREPWIP (Line 1)</option>
-                        <option value="PREAPPLE">PREAPPLE (Line 3)</option>
-                        <option value="PREPACK">PREPACK (Packings)</option>
-                        <option value="MASTERPKS">MASTERPKS (Packings)</option>
+                        <option value="PRECLAM">PRECLAM (Salad)</option>
+                        <option value="PREBISTRO">PREBISTRO (Bistro)</option>
+                        <option value="PREPWIP">PREPWIP (Bistro)</option>
+                        <option value="PREAPPLE">PREAPPLE (Apple)</option>
+                        <option value="PREPACK">PREPACK (MasterPacks)</option>
+                        <option value="MASTERPKS">MASTERPKS (MasterPacks)</option>
                       </select>
                       <button onClick={exportOORAsCSV} style={{ padding:'0.5rem 1rem', background:'#10b981', border:'none', borderRadius:'8px', color:'#fff', fontWeight:900, fontSize:'0.8rem', cursor:'pointer' }}>
                         📥 Export CSV
