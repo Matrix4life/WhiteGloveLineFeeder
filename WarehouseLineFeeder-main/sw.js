@@ -1,9 +1,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Warehouse Delivery System — Service Worker
+// White Glove System — Service Worker
 // ─────────────────────────────────────────────────────────────────────────────
 
-const CACHE_VERSION = "wds-v3.6";
-const CACHE_NAME = `wds-cache-${CACHE_VERSION}`;
+const CACHE_VERSION = "white-glove-v1";
+const CACHE_NAME = `white-glove-cache-${CACHE_VERSION}`;
 const PRECACHE_URLS = [
   "./",
   "./manifest.json",
@@ -32,7 +32,7 @@ self.addEventListener("activate", (event) => {
       caches.keys().then((keys) =>
         Promise.all(
           keys
-            .filter((k) => k.startsWith("wds-cache-") && k !== CACHE_NAME)
+            .filter((k) => k.startsWith("white-glove-cache-") && k !== CACHE_NAME)
             .map((k) => {
               console.log("[SW] Clearing old cache:", k);
               return caches.delete(k);

@@ -1,14 +1,17 @@
 {
-  "name": "LineFeeder",
-  "short_name": "LineFeeder",
-  "description": "Real-time production line ingredient delivery coordination",
+  "name": "White Glove System",
+  "short_name": "White Glove",
+  "description": "White Glove warehouse requests, picking, delivery and team coordination",
   "start_url": "/",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#090e1a",
   "theme_color": "#00ff88",
   "scope": "/",
-  "categories": ["productivity", "utilities"],
+  "categories": [
+    "productivity",
+    "utilities"
+  ],
   "icons": [
     {
       "src": "./icons/icon-72.png",
@@ -77,14 +80,24 @@
       "short_name": "Pick List",
       "description": "View active warehouse requests",
       "url": "/#picklist",
-      "icons": [{ "src": "./icons/icon-96.png", "sizes": "96x96" }]
+      "icons": [
+        {
+          "src": "./icons/icon-96.png",
+          "sizes": "96x96"
+        }
+      ]
     },
     {
       "name": "New Request",
       "short_name": "New Request",
       "description": "Submit a new delivery request",
       "url": "/#form",
-      "icons": [{ "src": "./icons/icon-96.png", "sizes": "96x96" }]
+      "icons": [
+        {
+          "src": "./icons/icon-96.png",
+          "sizes": "96x96"
+        }
+      ]
     }
   ]
 }
